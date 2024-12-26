@@ -1,0 +1,200 @@
+# MultimodalRAG System Setup and Running Guide
+
+## 1. Project Structure
+
+First, create the following directory structure:
+```
+multimodal_rag/
+├── core/
+│   ├── __init__.py
+│   ├── utils.py
+│   ├── model_manager.py
+│   ├── document_processor.py
+│   ├── retriever.py
+│   └── image_processor.py
+├── outputs/
+├── requirements.txt
+├── main.py
+├── run.py
+└── data_processor.py
+```
+
+## 2. Required Dependencies
+
+Create a `requirements.txt` file with the following content:
+```
+gradio>=4.0.0
+pandas>=1.5.0
+matplotlib>=3.5.0
+seaborn>=0.12.0
+Pillow>=9.0.0
+python-dotenv>=0.19.0
+langchain>=0.1.0
+pypdf>=3.0.0
+tabulate>=0.9.0
+openpyxl>=3.0.0
+fpdf>=2.7.0
+```
+
+## 3. Installation Steps
+
+1. Create a Python virtual environment (recommended):
+```bash
+python -m venv venv
+
+# Activate on Windows
+venv\Scripts\activate
+
+# Activate on Unix or MacOS
+source venv/bin/activate
+```
+
+2. Install the requirements:
+```bash
+pip install -r requirements.txt
+```
+
+## 4. Configuration
+
+1. Create core module files:
+   - Copy the provided code for each file into their respective locations in the `core/` directory
+   - Ensure all files have proper permissions
+
+2. Create main application files:
+   - Copy the provided code for `main.py`, `run.py`, and `data_processor.py` into the root directory
+   - Ensure they have proper permissions
+
+## 5. Running the System
+
+### Option 1: Running with Test Data
+```bash
+python run.py
+```
+This will:
+- Create a sample PDF document
+- Run system tests
+- Launch the Gradio interface
+
+### Option 2: Running Just the Main Application
+```bash
+python main.py
+```
+This will:
+- Launch the Gradio interface directly
+- Allow you to upload your own PDFs
+
+## 6. Using the System
+
+1. Access the Gradio Interface:
+   - Open your web browser
+   - Go to http://localhost:7860
+   - You should see the PDF Document Assistant interface
+
+2. Upload a Document:
+   - Click "Upload PDF Document"
+   - Select any PDF file from your computer
+   - Wait for processing to complete
+
+3. Ask Questions:
+   - Type your question in the text box
+   - Click "Submit"
+   - View the results, including:
+     - Text response
+     - Generated visualization
+     - Table output
+     - Text output
+
+## 7. Output Files
+
+All generated files will be saved in the `outputs/` directory:
+- Text outputs (.txt)
+- Table outputs (.xlsx)
+- Visualizations (.png)
+
+## 8. Troubleshooting
+
+Common Issues and Solutions:
+
+1. Module Import Errors:
+   ```
+   Error: No module named 'core'
+   Solution: Ensure you're running from the project root directory
+   ```
+
+2. PDF Processing Errors:
+   ```
+   Error: Cannot process PDF
+   Solution: Check if the PDF is readable and not password-protected
+   ```
+
+3. Port Already in Use:
+   ```
+   Error: Address already in use
+   Solution: Change the port in main.py (default is 7860)
+   ```
+
+4. Permission Errors:
+   ```
+   Error: Permission denied
+   Solution: Ensure write permissions for the outputs/ directory
+   ```
+
+## 9. Development and Testing
+
+To run tests and development features:
+
+1. Create test PDF:
+```python
+from run import create_sample_pdf
+pdf_path = create_sample_pdf()
+```
+
+2. Test data processing:
+```python
+from run import test_data_processing
+outputs = test_data_processing()
+```
+
+3. Test RAG system:
+```python
+from run import test_rag_system
+test_rag_system("path_to_pdf")
+```
+
+## 10. Production Deployment Considerations
+
+For production deployment, consider:
+
+1. Security:
+   - Add authentication
+   - Implement rate limiting
+   - Secure file uploads
+
+2. Performance:
+   - Configure proper logging
+   - Add error monitoring
+   - Implement caching
+
+3. Scalability:
+   - Use environment variables
+   - Configure proper resource limits
+   - Add load balancing if needed
+
+## 11. System Requirements
+
+Minimum requirements:
+- Python 3.8 or higher
+- 4GB RAM
+- 2GB free disk space
+- Modern web browser
+- Internet connection (for model access)
+
+## 12. Maintenance
+
+Regular maintenance tasks:
+1. Clear the outputs/ directory periodically
+2. Update dependencies regularly
+3. Monitor system logs
+4. Backup configuration files
+
+For additional help or issues, check the error logs in the console output or contact system support.
